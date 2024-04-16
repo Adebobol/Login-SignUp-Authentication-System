@@ -21,7 +21,9 @@ signUpSchema.pre('save', async function (next) {
     next()
 })
 
-
+signUpSchema.methods.comparePassword = async function (inputPassword, correctPassword) {
+    return await bcrypt.compare(inputPassword, correctPassword)
+}
 
 const signUp = mongoose.model('signUp', signUpSchema)
 

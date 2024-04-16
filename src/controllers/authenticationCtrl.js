@@ -30,8 +30,9 @@ exports.loginUser = async (req, res, next) => {
         return res.send('Provide a username and password.')
     }
 
-    const currentUser = await signUp.findOne({ name: username })
-    if (!currentUser) {
+    const currentUser = await signUp.findOne({ name: username }).select('password')
+    const pass = await currentUser.comparePassword(password, currentUser.password)
+    if (!currentUser || !pass) {
         return res.send('User cannot be found')
     }
     res.render('home')
