@@ -25,10 +25,15 @@ app.get('/', (req, res) => {
     res.render('login')
 })
 
+app.get('/login', (req, res) => {
+    res.render('login')
+})
+
 app.get('/signup', (req, res) => {
     res.render('signup')
 })
 app.use('/', signUpRouter)
+
 // app.post('/signup', async (req, res) => {
 //     const user = {
 //         name: req.body.username,
